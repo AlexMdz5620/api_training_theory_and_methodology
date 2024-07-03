@@ -13,8 +13,8 @@ const sesionSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    description: {
-        type: Array,
+    data: {
+        type: Object,
         required: true
     },
     isDeleted: {

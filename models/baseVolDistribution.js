@@ -21,11 +21,9 @@ const baseVolDistribution = mongoose.Schema({
         type: Number,
         required: true
     },
-    description_vol_distr:{
-        type: String
-    },
-    author: {
-        type: String
+    data: {
+        type: Object,
+        required: true
     },
     isDeleted: {
       type: Boolean,

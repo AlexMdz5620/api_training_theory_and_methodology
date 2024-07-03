@@ -25,7 +25,7 @@ const createMicro = async (req, res) => {
 const getAllMicros = async (req, res) => {
     try {
         const getAllMicros = await Micro.find()
-        if(getAllMicros) {
+        if(getAllMicros && getAllMicros.length > 0) {
             res.status(200).json({
                 msg: 'Get all microciclos',
                 micro: getAllMicros

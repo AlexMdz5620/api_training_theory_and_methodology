@@ -9,12 +9,9 @@ const baseCicloSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    description: {
-        type: String,
+    data: {
+        type: Object,
         required: true
-    },
-    author: {
-        type: String
     },
     isDeleted: {
       type: Boolean,
