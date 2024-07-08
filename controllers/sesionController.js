@@ -4,23 +4,19 @@ import {
     OrientContenido
 } from "../models/Sesion.js"
 
+const models = {
+    'naturaleza-tareas': NatTareas,
+    'magnitud-cargas': MagnCargas,
+    'orientacion-contenido': OrientContenido
+}
+
 // Create
 const createSesion = async (req, res) => {
-    const sesion = req.body
-    let newSesion;
+    const { type, ...sesion } = req.body
+    let newSesion = models[type]
 
-    switch(sesion.type){
-        case 'naturaleza-tareas':
-            newSesion = NatTareas
-            break;
-        case 'magnitud-cargas':
-            newSesion = MagnCargas
-            break;
-        case 'orientacion-contenido':
-            newSesion = OrientContenido
-            break;
-        default:
-            return res.status(400).json({ msg: "Tipo no válido" });
+    if (!newSesion) {
+        return res.status(400).json({ msg: "Invalid sesion" });
     }
 
     try {
@@ -45,21 +41,11 @@ const createSesion = async (req, res) => {
 // Read
 const getSesionsByType = async (req, res) => {
     const { type } = req.params;
-    let Model;
+    const Model = models[type]
 
-    switch(type){
-            case 'naturaleza-tareas':
-                Model = NatTareas
-                break;
-            case 'magnitud-cargas':
-                Model = MagnCargas
-                break;
-            case 'orientacion-contenido':
-                Model = OrientContenido
-                break;
-            default:
-                return res.status(400).json({ msg: "Tipo no válido" });
-        }
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
+    }
 
     try {
         const getSesionsByType = await Model.find()
@@ -83,21 +69,11 @@ const getSesionsByType = async (req, res) => {
 
 const getSesionByName = async (req, res) => {
     const { type, name_URL } = req.params;
-    let Model;
+    const Model = models[type]
 
-    switch(type){
-            case 'naturaleza-tareas':
-                Model = NatTareas
-                break;
-            case 'magnitud-cargas':
-                Model = MagnCargas
-                break;
-            case 'orientacion-contenido':
-                Model = OrientContenido
-                break;
-            default:
-                return res.status(400).json({ msg: "Tipo no válido" });
-        }
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
+    }
 
     try {
         const getSesionByName = await Model.findOne({ name_URL: name_URL })
@@ -122,21 +98,11 @@ const getSesionByName = async (req, res) => {
 // Update
 const updateSesion = async (req, res) => {
     const { type } = req.params;
-    let Model;
+    const Model = models[type]
 
-    switch(type){
-            case 'naturaleza-tareas':
-                Model = NatTareas
-                break;
-            case 'magnitud-cargas':
-                Model = MagnCargas
-                break;
-            case 'orientacion-contenido':
-                Model = OrientContenido
-                break;
-            default:
-                return res.status(400).json({ msg: "Tipo no válido" });
-        }
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
+    }
 
     try {
         const nameSesion = req.params.name_URL
@@ -162,21 +128,11 @@ const updateSesion = async (req, res) => {
 // soft delete
 const softDeleteSesion = async (req, res) => {
     const { type } = req.params;
-    let Model;
+    const Model = models[type]
 
-    switch(type){
-            case 'naturaleza-tareas':
-                Model = NatTareas
-                break;
-            case 'magnitud-cargas':
-                Model = MagnCargas
-                break;
-            case 'orientacion-contenido':
-                Model = OrientContenido
-                break;
-            default:
-                return res.status(400).json({ msg: "Tipo no válido" });
-        }
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
+    }
 
     try {
         const nameSesion = req.params.name_URL
@@ -202,21 +158,11 @@ const softDeleteSesion = async (req, res) => {
 // Delete
 const deleteSesion = async (req, res) => {
     const { type } = req.params;
-    let Model;
+    const Model = models[type]
 
-    switch(type){
-            case 'naturaleza-tareas':
-                Model = NatTareas
-                break;
-            case 'magnitud-cargas':
-                Model = MagnCargas
-                break;
-            case 'orientacion-contenido':
-                Model = OrientContenido
-                break;
-            default:
-                return res.status(400).json({ msg: "Tipo no válido" });
-        }
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
+    }
 
     try {
         const nameSesion = req.params.name_URL

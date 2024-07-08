@@ -4,24 +4,21 @@ import {
     SystConsts
 } from '../models/Dynamic.js'
 
+const models = {
+    'sum-vert-sup-100': SumVertSup100,
+    'sum-vert-equ-100': SumVertEqu100,
+    'sist-consts': SystConsts
+}
+
 // create
 const createDynamic = async (req, res) => {
-    const dynamic = req.body;
-    let newDynamic;
+    const { type, ...dynamic } = req.body;
+    let newDynamic = models[type]
 
-    switch (dynamic.type) {
-        case 'sum-vert-sup-100':
-            newDynamic = SumVertSup100;
-            break;
-        case 'sum-vert-equ-100':
-            newDynamic = SumVertEqu100;
-            break;
-        case 'sist-consts':
-            newDynamic = SystConsts;
-            break;
-        default:
-            return res.status(400).json({ msg: "Tipo no válido" });
+    if (!newDynamic) {
+        return res.status(400).json({ msg: "Invalid dynamic" });
     }
+
     try {
         if(newDynamic){
             const dynamicCreated = await newDynamic.create(dynamic);
@@ -43,20 +40,10 @@ const createDynamic = async (req, res) => {
 // get dynamics by type
 const getDynamicsByType = async (req, res) => {
     const { type } = req.params;
-    let Model;
-  
-    switch (type) {
-      case 'sum-vert-sup-100':
-        Model = SumVertSup100;
-        break;
-      case 'sum-vert-equ-100':
-        Model = SumVertEqu100;
-        break;
-      case 'sist-consts':
-        Model = SystConsts;
-        break;
-      default:
-        return res.status(400).send('Tipo no válido');
+    const Model = models[type]
+
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -81,20 +68,10 @@ const getDynamicsByType = async (req, res) => {
 // get dynamic by name
 const getDynamicByName = async (req, res) => {
     const { type, name } = req.params;
-    let Model;
-  
-    switch (type) {
-      case 'sum-vert-sup-100':
-        Model = SumVertSup100;
-        break;
-      case 'sum-vert-equ-100':
-        Model = SumVertEqu100;
-        break;
-      case 'sist-consts':
-        Model = SystConsts;
-        break;
-      default:
-        return res.status(400).send('Tipo no válido');
+    const Model = models[type]
+
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -120,20 +97,10 @@ const getDynamicByName = async (req, res) => {
 const updateDynaic = async (req, res) => {
     const { type, name } = req.params;
     const dynamic = req.body;
-    let Model;
-  
-    switch (type) {
-      case 'sum-vert-sup-100':
-        Model = SumVertSup100;
-        break;
-      case 'sum-vert-equ-100':
-        Model = SumVertEqu100;
-        break;
-      case 'sist-consts':
-        Model = SystConsts;
-        break;
-      default:
-        return res.status(400).send('Tipo no válido');
+    const Model = models[type]
+
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -160,20 +127,10 @@ const updateDynaic = async (req, res) => {
 // soft-delete
 const softDeleteDynamic = async (req, res) => {
     const { type, name } = req.params;
-    let Model;
-  
-    switch (type) {
-      case 'sum-vert-sup-100':
-        Model = SumVertSup100;
-        break;
-      case 'sum-vert-equ-100':
-        Model = SumVertEqu100;
-        break;
-      case 'sist-consts':
-        Model = SystConsts;
-        break;
-      default:
-        return res.status(400).send('Tipo no válido');
+    const Model = models[type]
+
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -198,20 +155,10 @@ const softDeleteDynamic = async (req, res) => {
 // delete
 const deleteDynamicByName = async (req, res) => {
     const { type, name } = req.params;
-    let Model;
-  
-    switch (type) {
-      case 'sum-vert-sup-100':
-        Model = SumVertSup100;
-        break;
-      case 'sum-vert-equ-100':
-        Model = SumVertEqu100;
-        break;
-      case 'sist-consts':
-        Model = SystConsts;
-        break;
-      default:
-        return res.status(400).send('Tipo no válido');
+    const Model = models[type]
+
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {

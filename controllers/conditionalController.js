@@ -5,26 +5,20 @@ import {
     Flexibility
 } from "../models/Conditional.js"
 
+const models = {
+    fuerza: Strenght,
+    resistencia: Endurance,
+    velocidad: Velocity,
+    flexibilidad: Flexibility
+}
+
 // Create
 const createConditional = async (req, res) => {
-    const conditional = req.body;
-    let newConditional;
+    const { type, ...conditional} = req.body;
+    const newConditional = models[type]
 
-    switch (conditional.type) {
-        case 'fuerza':
-            newConditional = Strenght;
-            break;
-        case 'resistencia':
-            newConditional = Endurance;
-            break;
-        case 'velocidad':
-            newConditional = Velocity;
-            break;
-        case 'flexibilidad':
-            newConditional = Flexibility;
-            break;
-        default:
-            return res.status(400).json({ msg: "Tipo no válido" });
+    if (!newConditional) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -49,23 +43,10 @@ const createConditional = async (req, res) => {
 // Get Conditional by Type
 const getConditionalByType = async (req, res) => {
     const { type } = req.params;
-    let Model;
-  
-    switch (type) {
-      case 'fuerza':
-        Model = Strenght;
-        break;
-      case 'resistencia':
-        Model = Endurance;
-        break;
-      case 'velocidad':
-        Model = Velocity;
-        break;
-      case 'flexibilidad':
-        Model = Flexibility;
-        break;
-      default:
-        return res.status(400).send('Tipo no válido');
+    const Model = models[type]
+
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
   
     try {
@@ -88,23 +69,10 @@ const getConditionalByType = async (req, res) => {
 // Get Conditional by Name
 const getConditionalByName = async (req, res) => {
     const { type, name_URL } = req.params;
-    let Model;
-  
-    switch (type) {
-      case 'fuerza':
-        Model = Strenght;
-        break;
-      case 'resistencia':
-        Model = Endurance;
-        break;
-      case 'velocidad':
-        Model = Velocity;
-        break;
-      case 'flexibilidad':
-        Model = Flexibility;
-        break;
-      default:
-        return res.status(400).send('Tipo no válido');
+    const Model = models[type]
+
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
   
     try {
@@ -127,23 +95,10 @@ const getConditionalByName = async (req, res) => {
 const updateConditional = async (req, res) => {
     const { type, name_URL } = req.params;
     const conditional = req.body;
-    let Model;
+    const Model = models[type]
 
-    switch (type) {
-        case 'fuerza':
-            Model = Strenght;
-            break;
-        case 'resistencia':
-            Model = Endurance;
-            break;
-        case 'velocidad':
-            Model = Velocity;
-            break;
-        case 'flexibilidad':
-            Model = Flexibility;
-            break;
-        default:
-            return res.status(400).json({ msg: "Tipo no válido" });
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -169,23 +124,10 @@ const updateConditional = async (req, res) => {
 // Soft-Delete
 const softDeleteConditional = async (req, res) => {
     const { type, name_URL } = req.params;
-    let Model;
+    let Model = models[type]
 
-    switch (type) {
-        case 'fuerza':
-            Model = Strenght;
-            break;
-        case 'resistencia':
-            Model = Endurance;
-            break;
-        case 'velocidad':
-            Model = Velocity;
-            break;
-        case 'flexibilidad':
-            Model = Flexibility;
-            break;
-        default:
-            return res.status(400).json({ msg: "Tipo no válido" });
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -210,23 +152,10 @@ const softDeleteConditional = async (req, res) => {
 // Delete
 const deleteConditional = async (req, res) => {
     const { type, name_URL } = req.params;
-    let Model;
+    const Model = models[type]
 
-    switch (type) {
-        case 'fuerza':
-            Model = Strenght;
-            break;
-        case 'resistencia':
-            Model = Endurance;
-            break;
-        case 'velocidad':
-            Model = Velocity;
-            break;
-        case 'flexibilidad':
-            Model = Flexibility;
-            break;
-        default:
-            return res.status(400).json({ msg: "Tipo no válido" });
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {

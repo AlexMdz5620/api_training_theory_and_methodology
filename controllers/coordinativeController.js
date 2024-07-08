@@ -1,42 +1,30 @@
 import {
-    Adaptation,
-    Balance,
-    Differentation,
-    GenDynCoor,
+    Synchronization,
     Orientation,
     Reaction,
-    Rhythm
+    Differentation,
+    Balance,
+    Rhythm,
+    Adaptation
 } from "../models/Coordinative.js"
+
+const models = {
+    sincronizacion: Synchronization,
+    orientacion: Orientation,
+    reaccion: Reaction,
+    diferenciacion: Differentation,
+    equilibrio: Balance,
+    ritmo: Rhythm,
+    adaptacion: Adaptation
+}
 
 // Create
 const createCoordinative = async (req, res) => {
-    const coordinative = req.body;
-    let newCoordinative;
+    const { type, ...coordinative } = req.body;
+    const newCoordinative = models[type]
 
-    switch (coordinative.type) {
-        case 'adaptacion':
-            newCoordinative = Adaptation;
-            break;
-        case 'balance':
-            newCoordinative = Balance;
-            break;
-        case 'diferenciacion':
-            newCoordinative = Differentation;
-            break;
-        case 'coordinacion-dinamica-general':
-            newCoordinative = GenDynCoor;
-            break;
-        case 'orientacion':
-            newCoordinative = Orientation;
-            break;
-        case 'reaccion':
-            newCoordinative = Reaction;
-            break;
-        case 'ritmo':
-            newCoordinative = Rhythm;
-            break;
-        default:
-            return res.status(400).json({ msg: "Tipo no válido" });
+    if (!newCoordinative) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -60,32 +48,10 @@ const createCoordinative = async (req, res) => {
 // Get all cordinative by Name_URL
 const getCoordinativeByName_URL = async (req, res) => {
     const { name_URL } = req.params;
-    let Model;
-  
-    switch (name_URL) {
-        case 'adaptacion':
-            Model = Adaptation;
-            break;
-          case 'balance':
-            Model = Balance;
-            break;
-          case 'diferenciacion':
-            Model = Differentation;
-            break;
-          case 'coordinacion-dinamica-general':
-            Model = GenDynCoor;
-            break;
-          case 'orientacion':
-            Model = Orientation;
-            break;
-          case 'reaccion':
-            Model = Reaction;
-            break;
-          case 'ritmo':
-            Model = Rhythm;
-            break;
-        default:
-            return res.status(400).send('Nombre no válido');
+    const Model = models[name_URL]
+
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
   
     try {
@@ -113,32 +79,10 @@ const getCoordinativeByName_URL = async (req, res) => {
 const updateCoordinative = async (req, res) => {
     const { name_URL } = req.params;
     const coordinative = req.body;
-    let Model;
+    const Model = models[name_URL]
 
-    switch (name_URL) {
-        case 'adaptacion':
-            Model = Adaptation;
-            break;
-        case 'balance':
-            Model = Balance;
-            break;
-        case 'diferenciacion':
-            Model = Differentation;
-            break;
-        case 'coordinacion-dinamica-general':
-            Model = GenDynCoor;
-            break;
-        case 'orientacion':
-            Model = Orientation;
-            break;
-        case 'reaccion':
-            Model = Reaction;
-            break;
-        case 'ritmo':
-            Model = Rhythm;
-            break;
-        default:
-            return res.status(400).json({ msg: "Nombre no válido" });
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -164,31 +108,10 @@ const updateCoordinative = async (req, res) => {
 // Soft-Delete
 const softDeleteCoordinative = async (req, res) => {
     const { name_URL } = req.params;
-    let Model;
+    const Model = models[name_URL]
 
-    switch (name_URL) {
-        case 'adaptacion':
-            Model = Adaptation;
-            break;
-        case 'balance':
-            Model = Balance;
-            break;
-        case 'diferenciacion':
-            Model = Differentation;
-            break;
-        case 'coordinacion-dinamica-general':
-            Model = GenDynCoor;
-            break;
-        case 'orientacion':
-            Model = Orientation;
-            break;
-        case 'reaccion':
-            Model = Reaction;
-            break;
-        case 'ritmo':
-            Model = Rhythm;
-            break;
-        default:
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
@@ -213,32 +136,10 @@ const softDeleteCoordinative = async (req, res) => {
 // Delete
 const deleteCoordinative = async (req, res) => {
     const { name_URL } = req.params;
-    let Model;
+    const Model = models[name_URL]
 
-    switch (name_URL) {
-        case 'adaptacion':
-            Model = Adaptation;
-            break;
-        case 'balance':
-            Model = Balance;
-            break;
-        case 'diferenciacion':
-            Model = Differentation;
-            break;
-        case 'coordinacion-dinamica-general':
-            Model = GenDynCoor;
-            break;
-        case 'orientacion':
-            Model = Orientation;
-            break;
-        case 'reaccion':
-            Model = Reaction;
-            break;
-        case 'ritmo':
-            Model = Rhythm;
-            break;
-        default:
-            return res.status(400).json({ msg: "Nombre no válido" });
+    if (!Model) {
+        return res.status(400).json({ msg: "Invalid capacity" });
     }
 
     try {
