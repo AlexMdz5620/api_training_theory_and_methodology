@@ -11,12 +11,9 @@ const baseCapacitySchema = mongoose.Schema({
     name_URL: {
         type: String
     },
-    description: {
-        type: String,
+    data: {
+        type: Object,
         required: true
-    },
-    author: {
-        type: String
     },
     isDeleted: {
       type: Boolean,
