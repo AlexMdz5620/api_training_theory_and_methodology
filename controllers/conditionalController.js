@@ -1,3 +1,4 @@
+import BaseCapacity from '../models/baseCapacity.js'
 import {
     Strenght,
     Endurance,
@@ -40,6 +41,21 @@ const createConditional = async (req, res) => {
     }
 };
 // Read
+// Get All Conditional
+const getAllConditional = async (req, res) => {
+    try {
+        const conditional = await BaseCapacity.find({ __t: { $in: ['Strenght', 'Endurance', 'Velocity', 'Flexibility'] } });
+        return res.status(200).json({
+            msg: "Conditional found successfully",
+            conditional
+        });
+    } catch (err) {
+        res.status(500).json({
+            msg: 'Error',
+            error: err
+        });
+    }
+};
 // Get Conditional by Type
 const getConditionalByType = async (req, res) => {
     const { type } = req.params;
@@ -180,6 +196,7 @@ const deleteConditional = async (req, res) => {
 
 export {
     createConditional,
+    getAllConditional,
     getConditionalByType,
     getConditionalByName,
     updateConditional,

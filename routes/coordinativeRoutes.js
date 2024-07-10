@@ -1,6 +1,7 @@
 import express from 'express'
 import {
     createCoordinative,
+    getAllCoordinative,
     getCoordinativeByName_URL,
     updateCoordinative,
     softDeleteCoordinative,
@@ -11,6 +12,7 @@ const coordinativeRoute = express.Router()
 
 coordinativeRoute.route('/')
     .post(createCoordinative)
+    .get(getAllCoordinative)
 
 coordinativeRoute.route('/:name_URL')
     .get(getCoordinativeByName_URL)

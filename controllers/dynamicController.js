@@ -1,3 +1,4 @@
+import baseVolDistribution from '../models/baseVolDistribution.js';
 import {
     SumVertSup100,
     SumVertEqu100,
@@ -37,6 +38,21 @@ const createDynamic = async (req, res) => {
     }
 }
 // read
+// Get All Dynamics
+const getAllDynamics = async (req, res) => {
+    try {
+        const dynamic = await baseVolDistribution.find();
+        return res.status(200).json({
+            msg: "Dynamics found successfully",
+            dynamic
+        });
+    } catch (err) {
+        res.status(500).json({
+            msg: 'Error',
+            error: err
+        });
+    }
+};
 // get dynamics by type
 const getDynamicsByType = async (req, res) => {
     const { type } = req.params;
@@ -183,6 +199,7 @@ const deleteDynamicByName = async (req, res) => {
 
 export {
     createDynamic,
+    getAllDynamics,
     getDynamicsByType,
     getDynamicByName,
     updateDynaic,

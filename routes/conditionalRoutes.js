@@ -1,6 +1,7 @@
 import express from 'express'
 import {
     createConditional,
+    getAllConditional,
     getConditionalByType,
     getConditionalByName,
     updateConditional,
@@ -12,6 +13,7 @@ const conditionalRoute = express.Router()
 
 conditionalRoute.route('/')
     .post(createConditional)
+    .get(getAllConditional)
 
 conditionalRoute.route('/:type')
     .get(getConditionalByType)

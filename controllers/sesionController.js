@@ -1,3 +1,4 @@
+import baseSesion from "../models/baseSesion.js"
 import {
     NatTareas,
     MagnCargas,
@@ -39,6 +40,20 @@ const createSesion = async (req, res) => {
     }
 }
 // Read
+const getAllSesions = async (req, res) => {
+    try {
+        const sesion = await baseSesion.find();
+        res.status(200).json({
+            msg: "Sesion retrieved successfully",
+            sesion
+        });
+    } catch (err) {
+        res.status(500).json({
+            msg: 'Error',
+            error: err
+        })
+    }
+}
 const getSesionsByType = async (req, res) => {
     const { type } = req.params;
     const Model = models[type]
@@ -187,6 +202,7 @@ const deleteSesion = async (req, res) => {
 
 export {
     createSesion,
+    getAllSesions,
     getSesionsByType,
     getSesionByName,
     updateSesion,

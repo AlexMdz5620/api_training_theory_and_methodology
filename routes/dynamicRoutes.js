@@ -1,6 +1,7 @@
 import express from 'express'
 import {
     createDynamic,
+    getAllDynamics,
     getDynamicsByType,
     getDynamicByName,
     updateDynaic,
@@ -12,6 +13,7 @@ const dynamicRoute = express.Router()
 
 dynamicRoute.route('/')
     .post(createDynamic)
+    .get(getAllDynamics)
 
 dynamicRoute.route('/:type')
     .get(getDynamicsByType)

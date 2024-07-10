@@ -1,6 +1,7 @@
 import express from 'express'
 import {
     createSesion,
+    getAllSesions,
     getSesionsByType,
     getSesionByName,
     updateSesion,
@@ -12,6 +13,7 @@ const sesionRoute = express.Router()
 
 sesionRoute.route('/')
     .post(createSesion)
+    .get(getAllSesions)
 
 sesionRoute.route('/:type')
     .get(getSesionsByType)

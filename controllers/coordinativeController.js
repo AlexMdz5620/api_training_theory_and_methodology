@@ -1,3 +1,4 @@
+import BaseCapacity from '../models/baseCapacity.js'
 import {
     Synchronization,
     Orientation,
@@ -45,6 +46,21 @@ const createCoordinative = async (req, res) => {
     }
 };
 // Read
+// Get all coordinative
+const getAllCoordinative = async (req, res) => {
+    try {
+        const coordinative = await BaseCapacity.find({ __t: { $in: ['Synchronization', 'Orientation', 'Reaction', 'Differentation', 'Balance', 'Rhythm', 'Adaptation'] } });
+        res.status(200).json({
+            msg: "Coordinative retrieved successfully",
+            coordinative
+        });
+    } catch (err) {
+        res.status(500).json({
+            msg: 'Error',
+            error: err
+        })
+    }
+}
 // Get all cordinative by Name_URL
 const getCoordinativeByName_URL = async (req, res) => {
     const { name_URL } = req.params;
@@ -164,6 +180,7 @@ const deleteCoordinative = async (req, res) => {
 
 export {
     createCoordinative,
+    getAllCoordinative,
     getCoordinativeByName_URL,
     updateCoordinative,
     softDeleteCoordinative,
