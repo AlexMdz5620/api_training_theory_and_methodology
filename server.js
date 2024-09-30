@@ -33,22 +33,22 @@ app.listen(8000,() => {
 })
 
 // Capacidades Físicas Condicionales y Coordinativas
-app.use('api/conditionals', conditionalRoute)
-app.use('api/coordinatives', coordinativeRoute)
+app.use('/conditionals', conditionalRoute)
+app.use('/coordinatives', coordinativeRoute)
 
 // Macrociclo
-app.use('api/macrocicles', macroRoute)
+app.use('/macrocicles', macroRoute)
 // Mesociclo
-app.use('api/mesocicles', mesoRoute)
+app.use('/mesocicles', mesoRoute)
 // Microciclo
-app.use('api/microcicles', microRoute)
+app.use('/microcicles', microRoute)
 
 // Dinámicas
-app.use('api/dynamics', dynamicRoute)
+app.use('/dynamics', dynamicRoute)
 
 // Sesion
-app.use('api/sesions', sesionRoute)
+app.use('/sesions', sesionRoute)
 
 // Ejercicios
-app.use('api/exercises/tren-sup', trenSupRute)
-app.use('api/exercises/tren-inf', trenInfRute)
+app.use('/exercises/tren-sup', trenSupRute)
+app.use('/exercises/tren-inf', trenInfRute)
